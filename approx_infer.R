@@ -1,7 +1,9 @@
 #Approximate Inference
+
+#Get values for predictive variables from get_streamflow and get_precip scripts
 source('get_streamflow.R')
 source('get_precip.R')
-#Get values for predictive variables from get_streamflow and get_precip scripts
+
 
 #Construct queries
 if(!is.null(utahlakeSpringQ) & !is.null(utahlakeJunePrecip)){

@@ -20,6 +20,7 @@ if(currentmonth>=6 & currentday>8){
   }else {   utahlakeJunePrecip <- NULL
   }
 }else{
+  ProvoPrecipJuneSum <- NA
   utahlakeJunePrecip <- NULL
 }
 if(currentmonth>=7 & currentday>8){
@@ -36,6 +37,7 @@ if(currentmonth>=7 & currentday>8){
   }else {   utahlakeJulyPrecip <- NULL
   }
 }else{
+  ProvoPrecipJulySum <- NA
   utahlakeJulyPrecip <- NULL
 }
 if(currentmonth>=8 & currentday>8){
@@ -52,6 +54,7 @@ if(currentmonth>=8 & currentday>8){
   }else {   utahlakeAugPrecip <- NULL
   }
 }else{
+  ProvoPrecipAugSum <- NA
   utahlakeAugPrecip <- NULL
 }
 
