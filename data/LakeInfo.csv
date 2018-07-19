@@ -1,8 +1,5 @@
-Name,Latitude,Longitude,Zoom
-Utah Lake,40.207517,-111.811107,10
-Deer Creek Reservoir,40.445291,-111.490622,11
-Scofield Reservoir,39.767879,-111.15305,11
-Great Salt Lake (South of Causeway),40.917368,-112.356438,9
-Farmington Bay,40.990568,-112.135964,10
-GSL System,40.581117,-111.88922,9
-Central Utah,40.410937,-111.69737,8
+"","Name","Latitude","Longitude","Zoom"
+"1","Utah Lake",40.207517,-111.811107,10
+"4","Great Salt Lake (South of Causeway)",40.917368,-112.356438,9
+"5","Farmington Bay",40.990568,-112.135964,10
+"6","Entire GSL System",40.581117,-111.88922,9

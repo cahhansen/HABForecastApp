@@ -1,2 +1,15 @@
 library(shiny)
+library(bnlearn)
+library(dataRetrieval)
+library(rnoaa)
 library(leaflet)
+library(magrittr)
+library(lubridate)
+library(shinythemes)
+
+load('data/precipdata.Rdata')
+load('data/LakeAvgChlBN.Rdata')
+load('data/varthresholds.Rdata')
+load('data/lakeavgchlmodeldata.Rdata')
+apikey <- 'oHzpSzCmInMhEdklKCOlSdxRjylSwKkS'
+options(noaakey = apikey)
