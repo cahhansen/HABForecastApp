@@ -1,10 +1,6 @@
 #Retrieves precipitation data from NWIS using dataRetrieval package and NWIS web services
 
-#Get the current date
-currentdate <- Sys.Date()
-currentday <- day(currentdate)
-currentmonth <- month(currentdate)
-currentyear <- as.character(year(currentdate))
+
 
 if(currentmonth>=6 & currentday>8){
   ProvoPrecipJune <- ncdc(datasetid='GHCND',stationid='GHCND:USC00427064',datatypeid='PRCP',
