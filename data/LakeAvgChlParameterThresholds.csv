@@ -1,9 +1,0 @@
-Parameter,ThresholdValue,BelowThresholdValue,AboveThresholdValue
-TotalSWE,1797660,Below Avg,Above Avg
-SpringQ,572.8,Below Avg,Above Avg
-JunePrecip,22.55,Low,High
-JulyPrecip,17.04,Low,High
-AugPrecip,32.6,Low,High
-JulyChlAvg,20,< 60 TSI,> 60 TSI
-AugChlAvg,20,< 60 TSI,> 60 TSI
-SeptChlAvg,20,< 60 TSI,> 60 TSI

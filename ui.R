@@ -6,20 +6,39 @@ shinyUI(navbarPage(theme = shinytheme("flatly"),
                    
                    tabPanel(title="Seasonal HAB Forecasting Tool",
                             sidebarLayout(
-                              sidebarPanel(helpText('This tool uses hydrologic and meteorological factors to estimate the liklihood of future bloom conditions for the current summer. Measurements of these factors are obtained from the USGS NWIS and NOAA NCDC databases via web services.'),
-                                           h4("User Input:"),
-                                           selectInput("habmeasure",label="Select measure of bloom conditions to forecast",
-                                                       choices=c("Trophic State Index",
-                                                                 "Bloom Coverage (%)"),
-                                                       selected=""),
-                                           h4("Measured Streamflow and Precipitation Data:"),
-                                           textOutput('springflowtext'),
-                                           textOutput('junepreciptext'),
-                                           textOutput('julypreciptext'),
-                                           textOutput('augpreciptext')
+                              sidebarPanel(helpText('This tool uses hydrologic and meteorological factors to estimate the likelihood of future bloom conditions for the current summer. Measurements of these factors are obtained from various databases, including the USGS NWIS, NOAA NCDC, and NRCS SNOTEL Network via web services.'),
+                                           sliderInput(inputId='riskthreshold',
+                                                       label='Risk Threshold',
+                                                       min=1,
+                                                       max=99,
+                                                       value=50,
+                                                       step=1)
+                                          
                                            ),
                                             
-                              mainPanel(leafletOutput('mymap')
+                              mainPanel( h4("Observed Hydrologic and Climate Data:"),
+                                         fluidRow(
+                                           column(3,
+                                                  h5('Observed SWE'),
+                                                  plotOutput('obssweplot')
+                                           ),
+                                           column(3,
+                                                  h5('Observed Winter Temperature'),
+                                                  plotOutput('obstempplot')
+                                                  
+                                           ),
+                                           column(3,
+                                                  h5('Observed Streamflow'),
+                                                  plotOutput('obsstreamflow')
+                                                  
+                                           ),
+                                           column(3,
+                                                  h5('Observed Precipitation'),
+                                                  plotOutput('obsprecip')
+                                                  
+                                           )
+                                         ),
+                                         leafletOutput('mymap')
                               )
                             )
                    ),
@@ -54,20 +73,6 @@ shinyUI(navbarPage(theme = shinytheme("flatly"),
                               )
                             )
                    ),
-                   tabPanel(title="Historical Algal Blooms in GSL System",
-                            sidebarLayout(
-                              sidebarPanel(helpText('This collection of chl a maps was produced using seasonal, lake-specific empirical remote sensing models and Landsat 5/7 imagery. This complete spatial coverage of the lakes greatly enhances the information obtained through traditional field sampling or buoys at fixed locations. '),
-                                           h4("User Input"),
-                                           selectInput("year",label="Select year range",
-                                                       choices=c("1984-1989","1990-1995","1996-2001","2002-2007","2008-2013","2014-2016"),
-                                                       selected=""),
-                                           selectInput("lake",label="Select Lake",
-                                                       choices=c("Utah Lake","GSL","Farmington Bay"),
-                                                       selected="")
-                              ),
-                              
-                              mainPanel(imageOutput('lakechlmap',height = 200))
-                            )),
                    navbarMenu("Additional Resources",
                               tabPanel(title=a("Utah Division of Water Quality HAB Information",
                                                href="https://deq.utah.gov/legacy/divisions/water-quality/health-advisory/harmful-algal-blooms/index.htm",
