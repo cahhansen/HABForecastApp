@@ -13,9 +13,9 @@ library(ggplot2)
 
 load('data/historicalfactors.Rdata')
 load('data/precipdata.Rdata')
-load('data/LakeAvgChlBN.Rdata')
+load('data/LakeChlBN.Rdata')
 load('data/varthresholds.Rdata')
-load('data/lakeavgchlmodeldata.Rdata')
+load('data/lakechlmodeldata.Rdata')
 
 #Get the current date
 currentdate <- Sys.Date()

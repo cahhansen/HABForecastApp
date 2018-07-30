@@ -6,7 +6,14 @@ shinyUI(navbarPage(theme = shinytheme("flatly"),
                    
                    tabPanel(title="Seasonal HAB Forecasting Tool",
                             sidebarLayout(
-                              sidebarPanel(helpText('This tool uses hydrologic and meteorological factors to estimate the likelihood of future bloom conditions for the current summer. Measurements of these factors are obtained from various databases, including the USGS NWIS, NOAA NCDC, and NRCS SNOTEL Network via web services.'),
+                              sidebarPanel(helpText('This tool uses hydrologic and meteorological factors to estimate the 
+                                                    likelihood of future bloom conditions for the current summer. 
+                                                    Measurements of these factors are obtained from various databases, including the USGS NWIS, NOAA NCDC, and NRCS SNOTEL Network via web services.'),
+                                           selectInput(inputId='habevent',
+                                                       label='HAB Event',
+                                                       choices=c("Average Chl-a above 20 ug/L",
+                                                                 "Maximum Chl-a above 90th percentile"),
+                                                       selected="Average Chl-a above 20 ug/L"),
                                            sliderInput(inputId='riskthreshold',
                                                        label='Risk Threshold',
                                                        min=1,
@@ -16,14 +23,15 @@ shinyUI(navbarPage(theme = shinytheme("flatly"),
                                           
                                            ),
                                             
-                              mainPanel( h4("Observed Hydrologic and Climate Data:"),
+                              mainPanel(leafletOutput('mymap'),
+                                        h4("Observed Hydrologic and Climate Data:"),
                                          fluidRow(
                                            column(3,
                                                   h5('Observed SWE'),
                                                   plotOutput('obssweplot')
                                            ),
                                            column(3,
-                                                  h5('Observed Winter Temperature'),
+                                                  h5('Observed Spring Temperature'),
                                                   plotOutput('obstempplot')
                                                   
                                            ),
@@ -37,8 +45,8 @@ shinyUI(navbarPage(theme = shinytheme("flatly"),
                                                   plotOutput('obsprecip')
                                                   
                                            )
-                                         ),
-                                         leafletOutput('mymap')
+                                         )
+                                         
                               )
                             )
                    ),
@@ -47,8 +55,8 @@ shinyUI(navbarPage(theme = shinytheme("flatly"),
                               sidebarPanel(helpText('Explore scenarios of future HAB conditions with user-defined hydrologic and meteorological conditions. Probabilities of conditions are calculated using the same underlying model and probabilities as the forecasting tool.'),
                                            h4("User Input:"),
                                            selectInput("habmeasure",label="Select measure of bloom conditions to forecast",
-                                                       choices=c("Trophic State Index",
-                                                                 "Bloom Coverage (%)"),
+                                                       choices=c("Average Chl",
+                                                                 "Maximum Chl"),
                                                        selected=""),
                                            helpText('Specify values for the following factors to explore "what-if" scenarios:'),
                                            selectInput("customswe",label="SWE for Oct-May of the current Water Year:",

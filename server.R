@@ -86,7 +86,41 @@ shinyServer(function(input, output,session) {
       ylab("Spring Streamflow (cfs)")
   )
   
-  #SWE
-  
   #Temperature
+  source('get_temp.R') #Get available temperature data
+  
+  tempdata <- historicalfactors[,c("Year","SpringProvoTemp")]
+  
+  output$obstempplot <- renderPlot(
+    
+    ggplot()+
+      geom_boxplot(data=tempdata,
+                   aes(y=SpringProvoTemp,x=""))+
+      geom_point(data=data.frame(x="",
+                                 y=ProvoTempAvg),
+                 aes(x=x,y=y),color='red')+
+      theme_bw()+
+      xlab("")+
+      ylab("Average Temperature (C)")
+    
+  )
+  
+  #SWE
+  source('get_swe.R') #Get available SWE data
+  
+  swedata <- historicalfactors[,c("Year","TotalSWE")]
+  
+  output$obssweplot <- renderPlot(
+    
+    ggplot()+
+      geom_boxplot(data=swedata,
+                   aes(y=TotalSWE,x=""))+
+      geom_point(data=data.frame(x="",
+                                 y=ProvoSWESum),
+                 aes(x=x,y=y),color='red')+
+      theme_bw()+
+      xlab("")+
+      ylab("Total SWE (in)")
+    
+  )
 })
