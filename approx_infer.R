@@ -47,36 +47,36 @@ if(is.null(utahlakeSpringQ) & !is.null(utahlakeJulyPrecip)){
 
 
 
-julygt_cmd = paste("cpquery(bnchlavg,JulyChlAvg=='> 60 TSI',",julystr,")", sep = "")
+julygt_cmd = paste("cpquery(bnchl,JulyAvg=='> Median',",julystr,")", sep = "")
 julygtprob <- ceiling(eval(parse(text = julygt_cmd))*100)
 
-auggt_cmd = paste("cpquery(bnchlavg,AugChlAvg=='> 60 TSI',",augstr,")", sep = "")
+auggt_cmd = paste("cpquery(bnchl,AugAvg=='> Median',",augstr,")", sep = "")
 auggtprob <- ceiling(eval(parse(text = auggt_cmd))*100)
 
 if(julygtprob>50 & !is.null(utahlakeAugPrecip)){
-  septpredvals <- c("> 60 TSI",utahlakeAugPrecip)
-  septstr = paste("(", c("JulyChlAvg","AugPrecip"), " == '",
+  septpredvals <- c("> Median",utahlakeAugPrecip)
+  septstr = paste("(", c("JulyAvg","AugPrecip"), " == '",
                  sapply(septpredvals, as.character), "')",
                  sep = "", collapse = " & ")
 }
 if(julygtprob>50 & is.null(utahlakeAugPrecip)){
-  septpredvals <- c("> 60 TSI")
-  septstr = paste("(", c("JulyChlAvg"), " == '",
+  septpredvals <- c("> Median")
+  septstr = paste("(", c("JulyAvg"), " == '",
                   sapply(septpredvals, as.character), "')",
                   sep = "", collapse = " & ")
 }
 if(julygtprob<50 & !is.null(utahlakeAugPrecip)){
-  septpredvals <- c("< 60 TSI",utahlakeAugPrecip)
-  septstr = paste("(", c("JulyChlAvg","AugPrecip"), " == '",
+  septpredvals <- c("< Median",utahlakeAugPrecip)
+  septstr = paste("(", c("JulyAvg","AugPrecip"), " == '",
                   sapply(septpredvals, as.character), "')",
                   sep = "", collapse = " & ")
 }
 if(julygtprob<50 & is.null(utahlakeAugPrecip)){
-  septpredvals <- c("< 60 TSI")
-  septstr = paste("(", c("JulyChlAvg"), " == '",
+  septpredvals <- c("< Median")
+  septstr = paste("(", c("JulyAvg"), " == '",
                   sapply(septpredvals, as.character), "')",
                   sep = "", collapse = " & ")
 }
 
-septgt_cmd = paste("cpquery(bnchlavg,SeptChlAvg=='> 60 TSI',",septstr,")", sep = "")
+septgt_cmd = paste("cpquery(bnchl,SeptAvg=='> Median',",septstr,")", sep = "")
 septgtprob <- ceiling(eval(parse(text = septgt_cmd))*100)
