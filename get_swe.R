@@ -1,7 +1,3 @@
-library(RNRCS)
-
-x <- grabNRCS.data(network='SNTL', site_id='820', timescale='daily', DayBgn='2018-01-01', DayEnd='2018-01-31')
-=======
 #Retrieves SNOTEL data via the AWDB (NRCS Air and Water Database) web services
 
 ProvoSWE <- grabNRCS.data(network="SNTL",site_id = 820, timescale = "daily",
@@ -10,18 +6,13 @@ colnames(ProvoSWE) <- c("Date","SWE")
 
 ProvoSWESum <- sum(ProvoSWE$SWE)
 
-SFSpringFlow <- mean(readNWISdata(sites="10150500", service="iv", 
-                                  parameterCd="00060", 
-                                  startDate="2018-03-01",endDate="2018-6-1")$X_00060_00000,na.rm=T)
-
-TotalUtahLakeStreamFlow <- round(ProvoSpringFlow+SFSpringFlow,0)
-
 #Categorize values to match the classes set in the model
-if(TotalUtahLakeStreamFlow < varthresholds[(varthresholds$Parameter=="SpringQ"),"ThresholdValue"] & TotalUtahLakeStreamFlow>0){
-  utahlakeSpringQ <- varthresholds[(varthresholds$Parameter=="SpringQ"),"BelowThresholdValue"]
-}else if(TotalUtahLakeStreamFlow >= varthresholds[(varthresholds$Parameter=="SpringQ"),"ThresholdValue"] & TotalUtahLakeStreamFlow>0){
-  utahlakeSpringQ<- varthresholds[(varthresholds$Parameter=="SpringQ"),"AboveThresholdValue"]
+if(ProvoSWESum < varthresholds[(varthresholds$Parameter=="TotalSWE"),"ThresholdValue"] & ProvoSWESum>0){
+  utahlakeTotalSWE <- varthresholds[(varthresholds$Parameter=="TotalSWE"),"BelowThresholdValue"]
+}else if(ProvoSWESum >= varthresholds[(varthresholds$Parameter=="TotalSWE"),"ThresholdValue"] & ProvoSWESum>0){
+  utahlakeTotalSWE<- varthresholds[(varthresholds$Parameter=="TotalSWE"),"AboveThresholdValue"]
 }else {
-  utahlakeSpringQ <- NULL
+  ProvoSWESum <- NA
+  utahlakeTotalSWE <- NULL
 }
 
